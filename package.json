@@ -1,0 +1,50 @@
+{
+  "name": "vibeguard",
+  "version": "0.1.0",
+  "description": "Static analysis for the concurrency and resilience bugs that are invisible in a demo and catastrophic at scale: missing timeouts/retries on external calls, and N+1 query loops.",
+  "type": "module",
+  "license": "Apache-2.0",
+  "author": "Ahmed Hassan (A2Z SOC)",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/AAH20/vibeguard.git"
+  },
+  "keywords": [
+    "static-analysis",
+    "production-readiness",
+    "resilience",
+    "n+1",
+    "timeout",
+    "retry",
+    "concurrency"
+  ],
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "main": "./dist/src/index.js",
+  "types": "./dist/src/index.d.ts",
+  "bin": {
+    "vibeguard": "./dist/src/cli.js"
+  },
+  "files": [
+    "dist/src",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "prepare": "npm run build",
+    "test": "npm run build && node --test dist/tests/missing-timeout.test.js dist/tests/n-plus-one-query.test.js dist/tests/scanner.test.js",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@babel/parser": "^7.25.0",
+    "@babel/traverse": "^7.25.0",
+    "@babel/types": "^7.25.0"
+  },
+  "devDependencies": {
+    "@types/babel__traverse": "^7.20.6",
+    "@types/node": "^22.10.0",
+    "typescript": "^5.4.0"
+  }
+}
